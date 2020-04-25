@@ -44,12 +44,14 @@ El juego se va a basar en el juego del protagonista de la película Rompe Ralph 
 ## Links
 ​
 ### Git
-Repositorio: 
+Repositorio:
+https://github.com/dlamo/project1---game.git
+[GitHub](http://github.com) 
 ​
 // Deploy: (no ahora, para un futuro)
 ​
 ### Slides
 ​
 ### Kanban
-https://trello.com/b/4DNsgafj/project-game!
+https://trello.com/b/4DNsgafj/project-game
 [Trello](https://trello.com/)
