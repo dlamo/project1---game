@@ -1,0 +1,15 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#new-game {
+    display: block;
+    margin: 0 auto;
+}
+
+#game {
+    display: none;
+}

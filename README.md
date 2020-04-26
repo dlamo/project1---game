@@ -11,6 +11,8 @@ El juego se va a basar en el juego del protagonista de la película Rompe Ralph 
 ## MVP - User stories
 * Yo como jugador quiero poder iniciar el juego
 * Yo como jugador quiero poder indicar un apodo para mi partida
+* Yo como jugador quiero que aparezca el edificio dibujado
+* Yo como jugador quiero que aparezca mi personaje
 * Yo como jugador quiero que aparezca fuego en el edificio
 * Yo como jugador quiero que el bombero se pueda mover a izquierda y derecha
 * Yo como jugador quiero que el bombero pueda disparar agua
@@ -33,7 +35,7 @@ El juego se va a basar en el juego del protagonista de la película Rompe Ralph 
     * responderá a las flechas izq y der 
 
 ## Backlog
-* Yo como jugador quiero que aparezcan fuego durante el juego <!-- SetInterval -->
+* Yo como jugador quiero que aparezca fuego durante el juego <!-- SetInterval -->
 * Yo como jugador quiero que hayan varios niveles de dificultad
 * Yo como jugador quiero ganar puntos si acabo rápido el juego
 * Yo como jugador quiero que el fuego aumente o se expanda si no se apaga
