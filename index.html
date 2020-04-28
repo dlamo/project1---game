@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <main id="start">
-        <h1>Fire Killer</h1>
+    <div id="start">
         <img src="#" alt="Logo Fire Killer">
         <button id="new-game">NEW GAME</button>
         <section id="knick">
             <label for="nickname">Nickname</label>
             <input id="nickname" type="text" placeholder="Enter your nickname here">
         </section>
-    </main>
-    <canvas id="game" width="500" height="800"></canvas>
+    </div>
+    <div id="main">
+        <h3>Player: <span id="player"></span> Score: <span id="score">0</span></h3>
+        <canvas id="game" width="1000" height="1000"></canvas>
+    </div>
+    <script src="js/main.js"></script>
 </body>
 </html>
