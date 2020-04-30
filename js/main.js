@@ -3,6 +3,8 @@ const context = canvas.getContext('2d');
 
 const player = document.getElementById('player');
 const playerName = document.getElementById('nickname').value;
+const time = document.getElementById('time');
+const points = document.getElementById('score');
 
 //start game
 window.onload = () => {
@@ -14,7 +16,8 @@ window.onload = () => {
         document.getElementById('start').style.display = 'none';
         document.getElementById('main').style.display = 'block';
         //add a fire in the building
-        building.addFire();
+        timerId = setInterval(countdown, 1000);
+        building.addFires();
         //start the screening of the elements
         requestAnimationFrame(updateGame);
         //events arrow left / right
@@ -36,24 +39,58 @@ const building = {
         this.height = 900 * 2048 / 2038;
         context.drawImage(this.img, this.x, this.y, this.width, this.height);
     },
-    addFire: function() {
-        this.fires.push(new Fire(90, 50));
+    addFires: function() {
+        const positions = [
+            [260, 190], [570, 190], [870, 190], 
+            [260, 480], [570, 480], [870, 480], 
+            [260, 750], [570, 750], [870, 750]
+        ];
+        for (let i = 0; i < 5; i++) { //CAMBIAR EL NÚMERO A MÁS GRANDE PARA ALARGAR EL JUEGO
+            const randomPosition = Math.floor(Math.random() * positions.length);
+            this.fires.push(new Fire(...positions[randomPosition]));
+        }
+    },
+    checkWaterShots: function(water) { //give water array as argument
+        if (water[0]) {
+            const bottomPoint = this.fires[0].y + this.fires[0].heightOfImage;
+            for (let i = 0; i < water.length; i++) {
+                if (water[0].y <= bottomPoint && water[0].y > (bottomPoint - 5)) {
+                    //defining the limits of the fire
+                    const leftLimit = this.fires[0].x;
+                    const rightLimit = this.fires[0].x + this.fires[0].widthOfSingleImage;
+                    if (water[0].x >= leftLimit && water[0].x <= rightLimit) {
+                        this.impactUpdate();
+                    }
+                }
+            }
+        }
+    },
+    impactUpdate: function() {
+        this.fires[0].intensity--;
+        firefighter.waterShots.shift();
+        points.innerHTML = parseInt(points.innerHTML) + 10;
+        if (this.fires[0].intensity === 0) {
+            this.fires.shift();
+        } 
+    },
+    gameCompleted: function() {
+        if (this.fires.length === 0) {
+            return true;
+        }
+        return false; 
     }
 };
 
 //define firefighter object
 const firefighter = {
     x: 10,
-    y: 0,
-    width: 0,
-    height: 0,
+    y: canvas.height,
+    width: 200,
+    height: 200 * 498 / 960,
     waterShots: [],
     img: new Image(),
     draw: function() {
         this.img.src = 'images/firefighter-left.webp';
-        this.y = canvas.height,
-        this.width = 200,
-        this.height = 200 * 498 / 960;
         //rotate the firefighter img
         context.translate(canvas.width / 2, canvas.height / 2);
         context.rotate(90 * Math.PI / 180);
@@ -79,6 +116,11 @@ const firefighter = {
             context.fill();
             context.closePath();
         })
+    },
+    clearWater: function() {
+        if (this.waterShots[0] && this.waterShots[0].y <= building.fires[0].y) {
+            this.waterShots.shift();
+        }
     }
 }
 
@@ -101,7 +143,7 @@ class Fire {
     }
     animateFire() {
         this.imageFrameNumber++; // changes the sprite we look at
-        this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
+        this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 
         context.drawImage(
             this.img, 
             this.imageFrameNumber * this.widthOfSingleImage, 0, // x and y - where in the sprite
@@ -123,28 +165,37 @@ class Water {
 
 //function to update the screen (canvas)
 function updateGame() {
-    context.save();
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    building.draw();
-    
-    //fire display
-    context.save();
-    context.scale(building.fires[0].intensity, building.fires[0].intensity); //CUANDO HAYAN MAS DE UNO HACER UN FOREACH QUE TE JUNTE LAS 2 LÍNEAS Y HACER DEPENDER EL SCALE CON EL VALOR DE LA INTENSIDAD.
-    building.fires[0].animateFire();
-    context.restore();
-    
-    //firefighter display
-    context.save(); 
-    firefighter.draw();
-    context.restore();
+    //building display
+        context.save();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        building.draw();
 
-    //water shots display
-    context.save();
-    firefighter.drawWaterShots();
-    context.restore();
-    
-    //console.log(firefighter.waterShots);
-    requestAnimationFrame(updateGame);
+        //firefighter display
+        context.save(); 
+        firefighter.draw();
+        context.restore();
+
+    if (!building.gameCompleted()) {
+        //fire display
+        context.save();
+        //context.scale(building.fires[0].intensity, building.fires[0].intensity);
+        building.fires[0].animateFire();
+        context.restore();
+
+        //water shots display
+        context.save();
+        firefighter.drawWaterShots();
+        context.restore();
+
+        firefighter.clearWater();
+        building.checkWaterShots(firefighter.waterShots);
+        
+        requestAnimationFrame(updateGame);
+
+    } else {
+        clearInterval(timerId);
+        window.alert('Congrats! Game Completed!');
+    }
 }
 
 //function to respond the key down left and right
@@ -156,4 +207,8 @@ function handleKeyEvent(e) {
     } else if (e.code === 'Space') {
         firefighter.waterShot(firefighter.x);
     }
+}
+
+function countdown() {
+    time.innerHTML--;
 }
