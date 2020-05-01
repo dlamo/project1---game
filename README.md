@@ -35,7 +35,7 @@ El juego se va a basar en el juego del protagonista de la película Rompe Ralph 
     * responderá a las flechas izq y der 
 
 ## Backlog
-* Yo como jugador quiero que aparezca fuego durante el juego <!-- SetInterval -->
+* Yo como jugador quiero que aparezca fuego durante el juego 
 * Yo como jugador quiero que hayan varios niveles de dificultad
 * Yo como jugador quiero ganar puntos si acabo rápido el juego
 * Yo como jugador quiero que el fuego aumente o se expanda si no se apaga
