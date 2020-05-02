@@ -44,12 +44,16 @@ const firefighter = {
         this.productShots.push(new Product(this.x)); /*AGENT*/
     },
     drawproductShots: function() {
-        this.productShots.forEach(function(shot) { /*AGENT*/
+        this.productShots.forEach(shot => { /*AGENT*/
             //first update the position of the product shot, then draw them in the canvas
             shot.y -= 5;
             context.beginPath();
             context.arc(shot.x, shot.y, 20, 0, 2 * Math.PI);
-            context.fillStyle = 'aqua';
+            if (this.product === 'water') {
+                context.fillStyle = 'red';
+            } else if (this.product === 'dry-chem') {
+                context.fillStyle = 'aqua';
+            }
             context.fill();
             context.closePath();
         })
