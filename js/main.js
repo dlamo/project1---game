@@ -65,8 +65,6 @@ function updateGame() {
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
         
-        console.log(firefighter.productShots);
-        
         requestAnimationFrame(updateGame);
 
     } else {
