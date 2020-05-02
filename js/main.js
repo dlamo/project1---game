@@ -45,6 +45,11 @@ function updateGame() {
     firefighter.drawHydrant();
     context.restore();
 
+    //product display
+    context.save(); 
+    firefighter.displayProduct();
+    context.restore();
+
     if (!building.gameEnd()) {
         //fire display
         context.save();
@@ -64,6 +69,8 @@ function updateGame() {
         firefighter.clearProduct();
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
+
+        //console.log(firefighter.productShots[0])
         
         requestAnimationFrame(updateGame);
 
@@ -80,7 +87,7 @@ function handleKeyEvent(e) {
     } else if (e.code === 'ArrowRight') {
         firefighter.move('right');
     } else if (e.code === 'Space') {
-        firefighter.productShot(firefighter.x);
+        firefighter.productShot(); //firefighter.x
     } else if (e.code === 'KeyC') {
         firefighter.selectExtinguishingAgent();
     }

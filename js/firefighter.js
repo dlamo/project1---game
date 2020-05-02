@@ -6,8 +6,8 @@ const firefighter = {
     width: 200,
     height: 200 * 498 / 960,
     lives: 3,
-    product: 'dry-chem',
-    productShots: [], /*AGENT*/
+    product: 'water',
+    productShots: [],
     img: new Image(),
     draw: function() {
         this.img.src = 'images/firefighter-left.webp';
@@ -19,7 +19,7 @@ const firefighter = {
     drawLives: function() {
         const live = new Image();
         context.fillStyle = 'white';
-        context.font = '48px Arial';
+        context.font = '36px Arial';
         context.fillText('Lives:', 10, 150);
         live.src = 'images/firefighter-left.webp';
         for (let i = 1; i <= this.lives; i++) {
@@ -40,26 +40,21 @@ const firefighter = {
             this.x += 20;
         };
     },
-    productShot: function(x) {
-        this.productShots.push(new Product(this.x)); /*AGENT*/
+    displayProduct: function() {
+        context.fillStyle = 'white';
+        context.font = '36px Arial';
+        context.fillText('Product:', 1060, 150);
+    },
+    productShot: function() {
+        this.productShots.push(new Product(this.x, this.product, context));
     },
     drawproductShots: function() {
-        this.productShots.forEach(shot => { /*AGENT*/
-            //first update the position of the product shot, then draw them in the canvas
-            shot.y -= 5;
-            context.beginPath();
-            context.arc(shot.x, shot.y, 20, 0, 2 * Math.PI);
-            if (this.product === 'water') {
-                context.fillStyle = 'red';
-            } else if (this.product === 'dry-chem') {
-                context.fillStyle = 'aqua';
-            }
-            context.fill();
-            context.closePath();
+        this.productShots.forEach(shot => {
+            shot.draw();
         })
     },
     clearProduct: function() {
-        if (this.productShots[0] && this.productShots[0].y <= building.fires[0].y) { /*AGENT*/
+        if (this.productShots[0] && this.productShots[0].y <= building.fires[0].y) {
             this.productShots.shift();
         };
     },
@@ -89,4 +84,3 @@ const firefighter = {
         };
     }
 };
-/*AGENT*/

@@ -76,8 +76,8 @@ const building = {
     },
     addFires: function() {
         const positions = [];
-        for (let z = 0; z <= 2; z++) { //cambiar 0 a 2
-            for (let x = 0; x <= 4; x++) { //cambiar 0 a 4
+        for (let z = 0; z <= 2; z++) {
+            for (let x = 0; x <= 4; x++) {
                 positions.push([150 + 112.5*(1 + 1.5 * x) - 32, 35 + 80*(1 + z) + 112.5*(1 + 1.5 * z) - 15]);
             };
         };
@@ -97,7 +97,7 @@ const building = {
         if (product[0]) {
             const bottomPoint = this.fires[0].y + this.fires[0].heightOfImage;
             for (let i = 0; i < product.length; i++) {
-                if (product[0].y <= bottomPoint && product[0].y > (bottomPoint - 5)) {
+                if (product[0].y <= bottomPoint && product[0].y > (bottomPoint - 5) && product[0].isAdequateProduct(this.fires[0].type)) {
                     //defining the limits of the fire
                     const leftLimit = this.fires[0].x;
                     const rightLimit = this.fires[0].x + this.fires[0].widthOfSingleImage;
