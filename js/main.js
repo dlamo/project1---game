@@ -39,25 +39,33 @@ function updateGame() {
     firefighter.draw();
     context.restore();
 
+    //lives display
+    context.save(); 
+    firefighter.drawLives();
+    firefighter.drawHydrant();
+    context.restore();
+
     if (!building.gameEnd()) {
         //fire display
         context.save();
-        //context.scale(building.fires[0].intensity, building.fires[0].intensity);
         building.fires[0].animateFire();
         context.restore();
 
-        //bricks display ---> PRÓXIMAMENTE...
-        /*context.save();
-        building.fallingBricks();
-        context.restore();*/
-
-        //water shots display
+        //bricks display
         context.save();
-        firefighter.drawWaterShots();
+        building.fallingBricks();
         context.restore();
 
-        firefighter.clearWater();
-        building.checkWaterShots(firefighter.waterShots);
+        //product shots display
+        context.save();
+        firefighter.drawproductShots();
+        context.restore();
+
+        firefighter.clearProduct();
+        building.checkProductShots(firefighter.productShots);
+        firefighter.checkBrickHit(building.bricks);
+        
+        console.log(firefighter.product, firefighter.productShots[0]);
         
         requestAnimationFrame(updateGame);
 
@@ -74,7 +82,9 @@ function handleKeyEvent(e) {
     } else if (e.code === 'ArrowRight') {
         firefighter.move('right');
     } else if (e.code === 'Space') {
-        firefighter.waterShot(firefighter.x);
+        firefighter.productShot(firefighter.x);
+    } else if (e.code === 'KeyC') {
+        firefighter.selectExtinguishingAgent();
     }
 }
 
