@@ -17,6 +17,12 @@ body {
     background-size: cover;
     width: 1200px;
     height: 100vh;
+    animation: loader 32s steps(600) infinite;
+}
+
+@keyframes loader {
+    from {background-position: 0;}
+    to {background-position: -600px 0;}
 }
 
 h1 {
@@ -26,6 +32,7 @@ h1 {
     background-image: linear-gradient(red, yellow);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .buttons-box button {
@@ -47,14 +54,14 @@ h1 {
 	top: .2em;
 }
 
-#knick {
+#start-screen section {
     height: 60px;
     display: flex;
     align-items: center;
     font-size: 24px;
 }
 
-#knick label {
+#start-screen section label {
     margin: 0 10px;
     padding: auto 20px;
 }

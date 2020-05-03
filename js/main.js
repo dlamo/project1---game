@@ -4,11 +4,14 @@ const playerName = document.getElementById('nickname').value;
 const player = document.getElementById('player');
 const time = document.getElementById('time');
 const points = document.getElementById('score');
+const introSound = document.querySelector('#start-screen audio');
+introSound.loop = true;
 
 let timerId = setInterval(countdown, 1000); // como relacionar el timer en la función más abajo
 
 //start game
 window.onload = () => {
+    //introSound.play();
     document.getElementById('new-game').onclick = () => { 
         newGame();
     }
