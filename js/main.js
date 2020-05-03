@@ -39,15 +39,11 @@ function updateGame() {
     firefighter.draw();
     context.restore();
 
-    //lives display
+    //lives, product and hydrant display
     context.save(); 
     firefighter.drawLives();
-    firefighter.drawHydrant();
-    context.restore();
-
-    //product display
-    context.save(); 
     firefighter.displayProduct();
+    firefighter.drawHydrant();
     context.restore();
 
     if (!building.gameEnd()) {

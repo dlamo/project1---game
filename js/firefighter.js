@@ -74,7 +74,15 @@ const firefighter = {
                         building.gameEnd();
                     };
                 };
-                //check hit with water (PENDIENTE...)
+                this.productShots.forEach((shot, index) => {
+                    console.log('punto 1')
+                    if (bricksArr[i].y + bricksArr[i].height >= shot.y - shot.radius && bricksArr[i].y + bricksArr[i].height > shot.y) {
+                        console.log('punto 2')
+                        if (bricksArr[i].x + bricksArr[i].width >= shot.x - shot.radius && bricksArr[i].x < shot.x + shot.radius) {
+                            this.productShots.splice(index, 1);
+                        };
+                    };
+                });
             };
         };
     },
