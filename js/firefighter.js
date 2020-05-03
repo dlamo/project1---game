@@ -44,6 +44,10 @@ const firefighter = {
         context.fillStyle = 'white';
         context.font = '36px Arial';
         context.fillText('Product:', 1060, 150);
+        context.font = '30px Arial';
+        context.fillText(this.product, 1060, 240);
+        const legend = new Product(this.x, this.product, context);
+        legend.drawActualProduct();
     },
     productShot: function() {
         this.productShots.push(new Product(this.x, this.product, context));

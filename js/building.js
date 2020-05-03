@@ -84,7 +84,6 @@ const building = {
         for (let i = 0; i < 5; i++) { //CAMBIAR EL NÚMERO A MÁS GRANDE PARA ALARGAR EL JUEGO
             const randomPosition = Math.floor(Math.random() * positions.length);
             const randomFire = Math.random();
-            console.log(randomFire);
             if (randomFire > 0.65) {
                 this.fires.push(new Fire(...positions[randomPosition],'blue'));
             } else {

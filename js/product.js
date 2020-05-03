@@ -1,11 +1,11 @@
 'use strict';
 
 class Product {
-    constructor(x, type, context) {
+    constructor(x, product, context) {
         this.x = x;
         this.y = canvas.height - 200;
         this.radius = 20;
-        this.type = type;
+        this.product = product;
         this.context = context;
     }
     draw() {
@@ -13,18 +13,23 @@ class Product {
         this.y -= 5;
         this.context.beginPath();
         this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        if (this.type === 'water') {
+        if (this.product === 'water') {
             context.fillStyle = 'aqua';
-        } else if (this.type === 'dry-chem') {
+        } else if (this.product === 'dry-chem') {
             context.fillStyle = 'white';
         }
         context.fill();
         context.closePath();
     }
+    drawActualProduct() {
+        this.x = 1080;
+        this.y = 190;
+        this.draw();
+    }
     isAdequateProduct(fireType) {
-        if (fireType === 'blue' && this.type === 'dry-chem') {
+        if (fireType === 'blue' && this.product === 'dry-chem') {
             return true;
-        } else if (fireType === 'red' && this.type === 'water') {
+        } else if (fireType === 'red' && this.product === 'water') {
             return true;
         } else {
             return false;
