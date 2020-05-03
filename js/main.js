@@ -5,16 +5,16 @@ const player = document.getElementById('player');
 const time = document.getElementById('time');
 const points = document.getElementById('score');
 
-let timerId = setInterval(countdown, 1000);
+let timerId = setInterval(countdown, 1000); // como relacionar el timer en la función más abajo
 
 //start game
 window.onload = () => {
-    document.getElementById('new-game').onclick = () => {
+    document.getElementById('new-game').onclick = () => { 
         newGame();
     }
     function newGame() {
         //change the screen
-        document.getElementById('start').style.display = 'none';
+        document.getElementById('start-screen').style.display = 'none';
         document.getElementById('main').style.display = 'block';
         //fire the building
         building.addFires();
@@ -65,8 +65,6 @@ function updateGame() {
         firefighter.clearProduct();
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
-
-        //console.log(firefighter.productShots[0])
         
         requestAnimationFrame(updateGame);
 

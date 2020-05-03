@@ -1,13 +1,69 @@
-body {
+body {  
+    font-family: "Press Start 2P", cursive;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
 }
 
-#new-game {
-    display: block;
-    margin: 0 auto;
+#start-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-image: url('../images/background_start.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1200px;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 130px;
+    line-height: 160px;
+    text-align: center;
+    background-image: linear-gradient(red, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.buttons-box button {
+    text-align: center;
+	margin: 40px 20px;
+    padding: 10px 30px;
+    background-color: lightgray;
+    color: gray;
+    box-shadow: 0 .2em gray; 
+    text-shadow: -1px -1px black, 1px 1px white;
+	border-radius: 7px; 
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.buttons-box button:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+}
+
+#knick {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+
+#knick label {
+    margin: 0 10px;
+    padding: auto 20px;
+}
+
+#nickname {
+    height: 40px;
+    width: auto;
+    padding-left: 10px;
+    font-size: 18px;
 }
 
 #main {
@@ -18,4 +74,5 @@ header {
     display: flex;
     justify-content: space-evenly;
     margin: 0 50px;
+    color: black;
 }
