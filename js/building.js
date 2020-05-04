@@ -1,6 +1,8 @@
 'use strict';
 
 const canvas = document.getElementById('game');
+canvas.setAttribute('width', 1200);
+canvas.setAttribute('height', 1200);
 const context = canvas.getContext('2d');
 
 const building = {
@@ -26,7 +28,7 @@ const building = {
         context.fillRect(125, 0, 950, 25);
         const windowWidth = 112.5;
         const windowHeight = windowWidth * 1.5;
-        for (let z = 1; z < 4; z++) {
+        for (let z = 1; z < 5; z++) {
             for (let i = 1; i <= 5; i++) {
                 const windowPositionX = 150 + (windowWidth / 2) * i + windowWidth * (i - 1);
                 const windowPositionY = 35 + 80 * z + (windowHeight) * (z-1);
@@ -62,6 +64,7 @@ const building = {
                     windowHeight / 2 - 22.5
                 );
             };
+            //roof & floor details
             context.fillStyle = '#cecdcb';
             context.beginPath();
             context.moveTo(125, 25);

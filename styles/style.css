@@ -48,7 +48,13 @@ h1 {
     font-weight: bold;
 }
 
-.buttons-box button:active {
+#new-game:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+}
+
+#music:focus {
 	box-shadow: none;
 	position: relative;
 	top: .2em;

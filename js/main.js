@@ -1,18 +1,30 @@
 'use strict';
 
+const main = document.getElementById('main');
 const playerName = document.getElementById('nickname').value;
 const player = document.getElementById('player');
 const time = document.getElementById('time');
 const points = document.getElementById('score');
+const music = document.getElementById('music');
+
 const introSound = document.querySelector('#start-screen audio');
-introSound.loop = true;
+const gameSound = document.querySelector('#game-sound');
+const fireSound = document.querySelector('#fire-sound');
 
 let timerId = setInterval(countdown, 1000); // como relacionar el timer en la función más abajo
 
 //start game
 window.onload = () => {
-    //introSound.play();
-    document.getElementById('new-game').onclick = () => { 
+    music.onclick = () => {
+        // hacer un getattribute o coger la propiedad del style position para volver a quitarle el focus
+        introSound.play();
+    }
+    document.getElementById('new-game').onclick = () => {
+        gameSound.loop = true;
+        gameSound.play(); 
+        fireSound.loop = true;
+        fireSound.volume = 0.5;
+        fireSound.play();
         newGame();
     }
     function newGame() {
@@ -79,9 +91,9 @@ function updateGame() {
 
 //function to respond the key down left and right
 function handleKeyEvent(e) {
-    if (e.code === 'ArrowLeft') {
+    if (e.code === 'ArrowLeft' && firefighter.x > 10) {
         firefighter.move('left');
-    } else if (e.code === 'ArrowRight') {
+    } else if (e.code === 'ArrowRight' && firefighter.x < 1090) {
         firefighter.move('right');
     } else if (e.code === 'Space') {
         firefighter.productShot(); //firefighter.x

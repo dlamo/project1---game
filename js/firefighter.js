@@ -14,6 +14,7 @@ const firefighter = {
         //rotate the firefighter img
         context.translate(canvas.width / 2, canvas.height / 2);
         context.rotate(90 * Math.PI / 180);
+        context.filter = 'brightness(150%)';
         context.drawImage(this.img, canvas.width / 2 - this.width, canvas.height / 2 - this.width / 2 - this.x, this.width, this.height);
     },
     drawLives: function() {
@@ -50,6 +51,7 @@ const firefighter = {
         legend.drawActualProduct();
     },
     productShot: function() {
+        playSound('bubbleShot');
         this.productShots.push(new Product(this.x, this.product, context));
     },
     drawproductShots: function() {
@@ -70,15 +72,16 @@ const firefighter = {
                     const leftLimit = this.x;
                     const rightLimit = this.x + this.height;
                     if (bricksArr[i].x + bricksArr[i].width >= leftLimit && bricksArr[i].x < rightLimit) {
+                        playSound('blockHit');
+                        playSound('maleGrunt');
                         this.lives--;
                         building.gameEnd();
                     };
                 };
                 this.productShots.forEach((shot, index) => {
-                    console.log('punto 1')
                     if (bricksArr[i].y + bricksArr[i].height >= shot.y - shot.radius && bricksArr[i].y + bricksArr[i].height > shot.y) {
-                        console.log('punto 2')
                         if (bricksArr[i].x + bricksArr[i].width >= shot.x - shot.radius && bricksArr[i].x < shot.x + shot.radius) {
+                            playSound('bubblePop');
                             this.productShots.splice(index, 1);
                         };
                     };
@@ -89,8 +92,10 @@ const firefighter = {
     selectExtinguishingAgent: function() {
         if (this.x === 1050) {
             if (this.product == 'water') {
+                playSound('changeProduct');
                 this.product = 'dry-chem'
             } else if (this.product == 'dry-chem') {
+                playSound('changeProduct');
                 this.product = 'water'
             };
         };
