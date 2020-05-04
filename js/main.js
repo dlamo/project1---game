@@ -1,9 +1,10 @@
 'use strict';
 
 const main = document.getElementById('main');
-const playerName = document.getElementById('nickname').value;
+const playerName = document.getElementById('nickname');
 const player = document.getElementById('player');
 const time = document.getElementById('time');
+let seconds = 0;
 const points = document.getElementById('score');
 const music = document.getElementById('music');
 
@@ -11,7 +12,7 @@ const introSound = document.querySelector('#start-screen audio');
 const gameSound = document.querySelector('#game-sound');
 const fireSound = document.querySelector('#fire-sound');
 
-let timerId = setInterval(countdown, 1000); // como relacionar el timer en la función más abajo
+let timerId = setInterval(countTime, 1000); // como relacionar el timer en la función más abajo
 
 //start game
 window.onload = () => {
@@ -25,6 +26,7 @@ window.onload = () => {
         fireSound.loop = true;
         fireSound.volume = 0.5;
         fireSound.play();
+        player.innerText = playerName.value;
         newGame();
     }
     function newGame() {
@@ -32,7 +34,7 @@ window.onload = () => {
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('main').style.display = 'block';
         //fire the building
-        building.addFires();
+        building.addFire();
         //start the screening of the elements
         requestAnimationFrame(updateGame);
         //events arrow left / right
@@ -102,6 +104,12 @@ function handleKeyEvent(e) {
     }
 }
 
-function countdown() {
-    time.innerHTML--;
+function countTime() {
+    seconds++;
+    if (seconds > 59) {
+        let secondNumber = seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60;
+        time.innerHTML = `${Math.floor(seconds/60)}:${secondNumber}`;
+    } else {
+        time.innerHTML = seconds;
+    }
 }

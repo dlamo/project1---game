@@ -77,14 +77,14 @@ const building = {
             context.fillRect(125, 23, 950, 2);
         }
     },
-    addFires: function() {
+    addFire: function() {
         const positions = [];
         for (let z = 0; z <= 2; z++) {
             for (let x = 0; x <= 4; x++) {
                 positions.push([150 + 112.5*(1 + 1.5 * x) - 32, 35 + 80*(1 + z) + 112.5*(1 + 1.5 * z) - 15]);
             };
         };
-        for (let i = 0; i < 5; i++) { //CAMBIAR EL NÚMERO A MÁS GRANDE PARA ALARGAR EL JUEGO
+        /*for (let i = 0; i < 5; i++) { //CAMBIAR EL NÚMERO A MÁS GRANDE PARA ALARGAR EL JUEGO
             const randomPosition = Math.floor(Math.random() * positions.length);
             const randomFire = Math.random();
             if (randomFire > 0.65) {
@@ -93,6 +93,13 @@ const building = {
                 this.fires.push(new Fire(...positions[randomPosition],'red'));
             };
             
+        };*/
+        const randomPosition = Math.floor(Math.random() * positions.length);
+        const randomFire = Math.random();
+        if (randomFire > 0.65) {
+            this.fires.push(new Fire(...positions[randomPosition],'blue'));
+        } else {
+            this.fires.push(new Fire(...positions[randomPosition],'red'));
         };
     },
     checkProductShots: function(product) { //give product array as argument
@@ -116,13 +123,11 @@ const building = {
         points.innerHTML = parseInt(points.innerHTML) + 10;
         if (this.fires[0].intensity === 0) {
             this.fires.shift();
+            this.addFire();
         }; 
     },
     gameEnd: function() {
-        if (this.fires.length === 0 || time.innerHTML == 0 || firefighter.lives === 0) {
-            return true;
-        }
-        return false; 
+        return !firefighter.lives;
     },
     fallingBricks: function() {
         if (Math.random() > 0.99) {
