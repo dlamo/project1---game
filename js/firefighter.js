@@ -68,10 +68,11 @@ const firefighter = {
         if (bricksArr[0]){
             for (let i = 0; i < bricksArr.length; i++) {
                 //check hit with the firefighter
-                if (bricksArr[i].y === (this.y - 0.6*this.width)) {
+                if (bricksArr[i].y >= (this.y - 0.6*this.width)) {
                     const leftLimit = this.x;
                     const rightLimit = this.x + this.height;
                     if (bricksArr[i].x + bricksArr[i].width >= leftLimit && bricksArr[i].x < rightLimit) {
+                        building.bricks.splice(i, 1);
                         playSound('blockHit');
                         playSound('maleGrunt');
                         this.lives--;

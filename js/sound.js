@@ -1,20 +1,26 @@
 'use strict';
 
 const sounds = {
-    "blockHit" : {
-      url : "sounds/block_hit.mp3"
+    'blockHit' : {
+      url : 'sounds/block_hit.mp3'
     },
-    "bubblePop" : {
+    'bubblePop' : {
       url : "sounds/bubble_pop.ogg",
     },
-    "bubbleShot" : {
-      url : "sounds/bubble_shot.mp3"
+    'bubbleShot' : {
+      url : 'sounds/bubble_shot.mp3'
     },
-    "changeProduct" : {
-      url : "sounds/change_product.mp3"
+    'changeProduct' : {
+      url : 'sounds/change_product.mp3'
     },
-    "maleGrunt" : {
-      url : "sounds/male_grunt.mp3"
+    'maleGrunt' : {
+      url : 'sounds/male_grunt.mp3'
+    },
+    'tada' : {
+      url : 'sounds/tada.mp3'
+    },
+    'gameOver' : {
+      url: 'sounds/game_over.mp3'
     }
 };
 const soundContext = new AudioContext();

@@ -84,16 +84,6 @@ const building = {
                 positions.push([150 + 112.5*(1 + 1.5 * x) - 32, 35 + 80*(1 + z) + 112.5*(1 + 1.5 * z) - 15]);
             };
         };
-        /*for (let i = 0; i < 5; i++) { //CAMBIAR EL NÚMERO A MÁS GRANDE PARA ALARGAR EL JUEGO
-            const randomPosition = Math.floor(Math.random() * positions.length);
-            const randomFire = Math.random();
-            if (randomFire > 0.65) {
-                this.fires.push(new Fire(...positions[randomPosition],'blue'));
-            } else {
-                this.fires.push(new Fire(...positions[randomPosition],'red'));
-            };
-            
-        };*/
         const randomPosition = Math.floor(Math.random() * positions.length);
         const randomFire = Math.random();
         if (randomFire > 0.65) {
@@ -129,16 +119,17 @@ const building = {
     gameEnd: function() {
         return !firefighter.lives;
     },
-    fallingBricks: function() {
-        if (Math.random() > 0.99) {
+    fallingBricks: function(speed) {
+        let speedValue = 0.99 / speed;
+        if (Math.random() > speedValue) {
             const x = Math.floor(Math.random() * 900 + 150);
             this.bricks.push(new Brick(x));
         }
-        this.drawBricks();
+        this.drawBricks(speed);
     },
-    drawBricks: function() {
+    drawBricks: function(speed) {
         this.bricks.forEach(function(brick) {
-            brick.y += 4;
+            brick.y += 4*speed;
             context.fillStyle = '#B73239';
             context.fillRect(brick.x, brick.y, brick.width, brick.height);
         });

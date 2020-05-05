@@ -5,12 +5,15 @@ const playerName = document.getElementById('nickname');
 const player = document.getElementById('player');
 const time = document.getElementById('time');
 let seconds = 0;
+let gameSpeed = 1;
 const points = document.getElementById('score');
 const music = document.getElementById('music');
 
 const introSound = document.querySelector('#start-screen audio');
 const gameSound = document.querySelector('#game-sound');
 const fireSound = document.querySelector('#fire-sound');
+
+const maxScore = localStorage.getItem('maxScore');
 
 let timerId = setInterval(countTime, 1000); // como relacionar el timer en la función más abajo
 
@@ -44,7 +47,6 @@ window.onload = () => {
 
 //function to update the screen (canvas)
 function updateGame() {
-
     //building display
     context.save();
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -71,7 +73,7 @@ function updateGame() {
 
         //bricks display
         context.save();
-        building.fallingBricks();
+        building.fallingBricks(gameSpeed);
         context.restore();
 
         //product shots display
@@ -82,11 +84,21 @@ function updateGame() {
         firefighter.clearProduct();
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
+
+        //console.log(maxScore);
         
         requestAnimationFrame(updateGame);
-
     } else {
         clearInterval(timerId);
+        if (!maxScore) {
+            localStorage.setItem('maxScore', parseInt(points.innerHTML));
+            playSound('tada');
+        } else if (maxScore < parseInt(points.innerHTML)) {
+            localStorage.maxScore = parseInt(points.innerHTML);
+            playSound('tada');
+        } else {
+            playSound('gameOver');
+        }
         window.alert('Game Completed!');
     }
 }
@@ -111,5 +123,8 @@ function countTime() {
         time.innerHTML = `${Math.floor(seconds/60)}:${secondNumber}`;
     } else {
         time.innerHTML = seconds;
+    }
+    if (seconds % 30 == 0) {
+        gameSpeed *= 1.003;
     }
 }
