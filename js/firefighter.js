@@ -41,6 +41,7 @@ const firefighter = {
             this.x += 20;
         };
     },
+    //display the current product the player is shooting
     displayProduct: function() {
         context.fillStyle = 'white';
         context.font = '36px Arial';
@@ -50,15 +51,18 @@ const firefighter = {
         const legend = new Product(this.x, this.product, context);
         legend.drawActualProduct();
     },
+    //create the bubble product
     productShot: function() {
         playSound('bubbleShot');
         this.productShots.push(new Product(this.x, this.product, context));
     },
+    //call the method draw inside shot
     drawproductShots: function() {
         this.productShots.forEach(shot => {
             shot.draw();
         })
     },
+    //clear product bubble once are out of range of the fire
     clearProduct: function() {
         if (this.productShots[0] && this.productShots[0].y <= building.fires[0].y) {
             this.productShots.shift();
@@ -67,7 +71,7 @@ const firefighter = {
     checkBrickHit: function(bricksArr) {
         if (bricksArr[0]){
             for (let i = 0; i < bricksArr.length; i++) {
-                //check hit with the firefighter
+                //check hit of the bricks with the firefighter
                 if (bricksArr[i].y >= (this.y - 0.6*this.width)) {
                     const leftLimit = this.x;
                     const rightLimit = this.x + this.height;
@@ -79,6 +83,7 @@ const firefighter = {
                         building.gameEnd();
                     };
                 };
+                //check hit of each of the bricks with the bubbles
                 this.productShots.forEach((shot, index) => {
                     if (bricksArr[i].y + bricksArr[i].height >= shot.y - shot.radius && bricksArr[i].y + bricksArr[i].height > shot.y) {
                         if (bricksArr[i].x + bricksArr[i].width >= shot.x - shot.radius && bricksArr[i].x < shot.x + shot.radius) {
@@ -90,8 +95,9 @@ const firefighter = {
             };
         };
     },
+    //change the product when you are behind the hydrant
     selectExtinguishingAgent: function() {
-        if (this.x === 1050) {
+        if (this.x >= 1010) {
             if (this.product == 'water') {
                 playSound('changeProduct');
                 this.product = 'dry-chem'

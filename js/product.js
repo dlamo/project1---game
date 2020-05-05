@@ -9,7 +9,7 @@ class Product {
         this.context = context;
     }
     draw() {
-        //first update the position of the product shot, then draw them in the canvas
+        //first update the position of the product shot then draw them in the canvas
         this.y -= 5;
         this.context.beginPath();
         this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
@@ -21,11 +21,13 @@ class Product {
         context.fill();
         context.closePath();
     }
+    //draw which one the player is currently using
     drawActualProduct() {
         this.x = 1080;
         this.y = 190;
         this.draw();
     }
+    //determine if the product is the correct when it hits the fire
     isAdequateProduct(fireType) {
         if (fireType === 'blue' && this.product === 'dry-chem') {
             return true;

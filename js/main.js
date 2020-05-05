@@ -1,27 +1,30 @@
 'use strict';
 
+//DOM selectors
 const main = document.getElementById('main');
 const playerName = document.getElementById('nickname');
 const player = document.getElementById('player');
 const time = document.getElementById('time');
-let seconds = 0;
-let gameSpeed = 1;
 const points = document.getElementById('score');
 const music = document.getElementById('music');
-
 const introSound = document.querySelector('#start-screen audio');
 const gameSound = document.querySelector('#game-sound');
 const fireSound = document.querySelector('#fire-sound');
 
+//starting declarations
 const maxScore = localStorage.getItem('maxScore');
-
-let timerId = setInterval(countTime, 1000); // como relacionar el timer en la función más abajo
+const maxScoreName = localStorage.getItem('maxScoreName');
+let seconds = 0; //game time
+let gameSpeed = 1; //variable needeed to increment the speed of the game
+const timerId = setInterval(countTime, 1000); // como relacionar el timer en la función más abajo
 
 //start game
 window.onload = () => {
+    //intro music control through button
     music.onclick = () => {
         introSound.paused ? introSound.play() : introSound.pause();
     }
+    //when new-game is clicked, start game sounds, copy the nickname and start the game
     document.getElementById('new-game').onclick = () => {
         introSound.pause();
         gameSound.loop = true;
@@ -36,11 +39,11 @@ window.onload = () => {
         //change the screen
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('main').style.display = 'block';
-        //fire the building
+        //print first fire
         building.addFire();
         //start the screening of the elements
         requestAnimationFrame(updateGame);
-        //events arrow left / right
+        //events arrow left/right
         document.addEventListener('keydown', handleKeyEvent);
     }
 };
@@ -65,6 +68,7 @@ function updateGame() {
     firefighter.drawHydrant();
     context.restore();
 
+    //in case the game is not over
     if (!building.gameEnd()) {
         //fire display
         context.save();
@@ -81,15 +85,16 @@ function updateGame() {
         firefighter.drawproductShots();
         context.restore();
 
+        //eliminate product when it goes out of fire range, check collisions product-water and firefighter-brick
         firefighter.clearProduct();
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
 
-        //console.log(maxScore);
-        
         requestAnimationFrame(updateGame);
     } else {
+        //stop the timer once the game is over
         clearInterval(timerId);
+        //check the maxscore in the localStorage and return if the game score is higher
         if (!maxScore) {
             localStorage.setItem('maxScore', parseInt(points.innerHTML));
             playSound('tada');
@@ -99,11 +104,10 @@ function updateGame() {
         } else {
             playSound('gameOver');
         }
-        window.alert('Game Completed!');
     }
 }
 
-//function to respond the key down left and right
+//function to respond multiple keydown
 function handleKeyEvent(e) {
     if (e.code === 'ArrowLeft' && firefighter.x > 10) {
         firefighter.move('left');
@@ -116,6 +120,7 @@ function handleKeyEvent(e) {
     }
 }
 
+//function that controls the time passed and the increase of the game speed
 function countTime() {
     seconds++;
     if (seconds > 59) {

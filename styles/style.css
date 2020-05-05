@@ -6,6 +6,8 @@ body {
     align-items: center;
 }
 
+/* START SCREEN SECTION */
+
 #start-screen {
     display: flex;
     flex-direction: column;
@@ -73,14 +75,20 @@ h1 {
     font-size: 18px;
 }
 
+/* Instructions section */
+
 .instructions h3 {
     font-size: 24px;
     margin-top: 90px;
+    text-decoration-line: underline;
 }
 
 .instructions button {
     display: inline-block;
     margin: 10px;
+    background-color: gray;
+    color: lightgray;
+    text-shadow: -1px -1px white, 1px 1px black;
 }
 
 .instructions p {
@@ -90,6 +98,8 @@ h1 {
 #main {
     display: none;
 }
+
+/* GAME SCREEN SECTION */
 
 header {
     display: flex;

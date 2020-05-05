@@ -1,16 +1,18 @@
 'use strict';
 
+//canvas definition
 const canvas = document.getElementById('game');
 canvas.setAttribute('width', 1200);
 canvas.setAttribute('height', 1200);
 const context = canvas.getContext('2d');
 
+//this building will be the main element of the events that happen during the game
 const building = {
     fires: [],
     bricks: [],
     draw: function() {
-        //bricks design
         context.fillRect(0, 0, canvas.clientWidth, canvas.height);
+        //brick-wall design
         context.fillStyle = 'moccasin';
         context.fillRect(150, 0, 900, canvas.height);
         context.fillStyle = '#dc5539';
@@ -77,9 +79,10 @@ const building = {
             context.fillRect(125, 23, 950, 2);
         }
     },
+    //display a fire
     addFire: function() {
         const positions = [];
-        for (let z = 0; z <= 2; z++) {
+        for (let z = 0; z <= 2; z++) { //definition of all the window positions, except the last row of them
             for (let x = 0; x <= 4; x++) {
                 positions.push([150 + 112.5*(1 + 1.5 * x) - 32, 35 + 80*(1 + z) + 112.5*(1 + 1.5 * z) - 15]);
             };
@@ -92,6 +95,7 @@ const building = {
             this.fires.push(new Fire(...positions[randomPosition],'red'));
         };
     },
+    //check if the fire i
     checkProductShots: function(product) { //give product array as argument
         if (product[0]) {
             const bottomPoint = this.fires[0].y + this.fires[0].heightOfImage;
@@ -107,6 +111,7 @@ const building = {
             };
         };
     },
+    //reduce the intensity value of the fire and if it's 0, eliminate it and creat a new one
     impactUpdate: function() {
         this.fires[0].intensity--;
         firefighter.productShots.shift();
@@ -119,6 +124,7 @@ const building = {
     gameEnd: function() {
         return !firefighter.lives;
     },
+    //create and set the creation rate of bricks
     fallingBricks: function(speed) {
         let speedValue = 0.99 / speed;
         if (Math.random() > speedValue) {
@@ -127,6 +133,7 @@ const building = {
         }
         this.drawBricks(speed);
     },
+    //draw the bricks, the speed value determine wether the bricks fall faster
     drawBricks: function(speed) {
         this.bricks.forEach(function(brick) {
             brick.y += 4*speed;
