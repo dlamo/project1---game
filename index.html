@@ -18,8 +18,16 @@
             <label for="nickname">Nickname:</label>
             <input id="nickname" type="text" placeholder="Enter your nickname here">
         </section>
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <button class="directions">&larr;</button><span>Move to left</span><br>
+            <button class="directions">&rarr;</button><span>Move to right</span><br>
+            <button>Space</button><span>Shot extinguishing product</span><br>
+            <button>C</button><span>Change extinguishing product</span>
+            <p><span><img src="images/fire1.png"></span>Extinguish with water <span><img src="images/fire2.png"></span>Extinguish with dry-chem</p>
+        </div>
         <audio src="sounds/intro_code_red.mp3"></audio>
-    </div>
+    </div> <!-- star-screen -->
     <div id="main">
         <header>
             <h3>Player: <span id="player"></span></h3>
@@ -29,7 +37,7 @@
         <canvas id="game"></canvas>
         <audio id="game-sound" src="sounds/city_ambiance.mp3"></audio>
         <audio id="fire-sound" src="sounds/fire_sound.mp3"></audio>
-    </div>
+    </div> <!-- main -->
     <script src="js/sound.js" type="text/javascript"></script>
     <script src="js/fire.js"></script>
     <script src="js/product.js"></script>
