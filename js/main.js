@@ -16,7 +16,7 @@ const maxScore = localStorage.getItem('maxScore');
 const maxScoreName = localStorage.getItem('maxScoreName');
 let seconds = 0; //game time
 let gameSpeed = 1; //variable needeed to increment the speed of the game
-const timerId = setInterval(countTime, 1000); // como relacionar el timer en la función más abajo
+let timerId = undefined; //initializating the variable that will become setInterval
 
 //start game
 window.onload = () => {
@@ -33,6 +33,7 @@ window.onload = () => {
         fireSound.volume = 0.5;
         fireSound.play();
         player.innerText = playerName.value;
+        timerId = setInterval(countTime, 1000);
         newGame();
     }
     function newGame() {
@@ -61,15 +62,15 @@ function updateGame() {
     firefighter.draw();
     context.restore();
 
-    //lives, product and hydrant display
-    context.save(); 
-    firefighter.drawLives();
-    firefighter.displayProduct();
-    firefighter.drawHydrant();
-    context.restore();
-
     //in case the game is not over
     if (!building.gameEnd()) {
+        //lives, product and hydrant display
+        context.save(); 
+        firefighter.drawLives();
+        firefighter.displayProduct();
+        firefighter.drawHydrant();
+        context.restore();
+        
         //fire display
         context.save();
         building.fires[0].animateFire();
@@ -94,14 +95,21 @@ function updateGame() {
     } else {
         //stop the timer once the game is over
         clearInterval(timerId);
+        gameSound.pause();
+        fireSound.pause();
         //check the maxscore in the localStorage and return if the game score is higher
         if (!maxScore) {
+            building.drawWinner();
             localStorage.setItem('maxScore', parseInt(points.innerHTML));
+            localStorage.setItem('maxScoreName', player.innerText);
             playSound('tada');
         } else if (maxScore < parseInt(points.innerHTML)) {
+            building.drawWinner();
             localStorage.maxScore = parseInt(points.innerHTML);
+            localStorage.maxScoreName = player.innerText;
             playSound('tada');
         } else {
+            building.drawLoser();
             playSound('gameOver');
         }
     }
@@ -129,7 +137,7 @@ function countTime() {
     } else {
         time.innerHTML = seconds;
     }
-    if (seconds % 30 == 0) {
-        gameSpeed *= 1.003;
+    if (seconds % 20 == 0) {
+        gameSpeed *= 1.004;
     }
 }

@@ -143,5 +143,11 @@ const building = {
         if (this.bricks[0] && this.bricks[0].y > canvas.height) {
             this.bricks.shift();
         }
+    },
+    drawWinner: function() {
+
+    },
+    drawLoser: function() {
+
     }
 };

@@ -1,12 +1,14 @@
 # Fire killer!
 
 ## Descripción
-El juego se va a basar en el juego del protagonista de la película Rompe Ralph versionado a un juego en el que en un edificio van a ir apareciendo nuevos focos. 
+El juego se va a basar en el juego del protagonista de la película Rompe Ralph versionado a un juego tipo arcade en el que un bombero tendrá que apagar fuegos que van apareciendo en un edificio.
 
 ## Reglas del juego  
 * El jugador se mueve de izquierda a derecha y dispara automáticamente para arriba con la barra de espacio.
-* El jugador tiene X segundos para apagar el fuego.
-* Si se acaba el tiempo, el juego termina.
+* El jugador tiene un máximo de 3 vidas.
+* Si el jugador pierde todas las vidas, el juego termina.
+* Existen 2 tipos de fuego: azul y rojo.
+* El jugador tendrá 2 tipos de productos para apagar cada tipo de fuego.
 
 ## MVP - User stories
 * Yo como jugador quiero poder iniciar el juego
@@ -49,10 +51,12 @@ El juego se va a basar en el juego del protagonista de la película Rompe Ralph 
 ​
 ### Git
 Repositorio:
-https://github.com/dlamo/project1---game.git
+https://github.com/dlamo/project1-fire-killer
 [GitHub](http://github.com) 
 ​
-// Deploy: (no ahora, para un futuro)
+Deploy:
+https://dlamo.github.io/project1-fire-killer/
+[GitHub](http://github.com)
 ​
 ### Slides
 ​
