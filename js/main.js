@@ -20,10 +20,10 @@ let timerId = setInterval(countTime, 1000); // como relacionar el timer en la fu
 //start game
 window.onload = () => {
     music.onclick = () => {
-        // hacer un getattribute o coger la propiedad del style position para volver a quitarle el focus
-        introSound.play();
+        introSound.paused ? introSound.play() : introSound.pause();
     }
     document.getElementById('new-game').onclick = () => {
+        introSound.pause();
         gameSound.loop = true;
         gameSound.play(); 
         fireSound.loop = true;
