@@ -95,15 +95,15 @@ const building = {
             this.fires.push(new Fire(...positions[randomPosition],'red'));
         };
     },
-    //check if the fire i
+    //check if the fire if the fire is impacted by the product
     checkProductShots: function(product) { //give product array as argument
         if (product[0]) {
             const bottomPoint = this.fires[0].y + this.fires[0].heightOfImage;
             for (let i = 0; i < product.length; i++) {
-                if (product[0].y <= bottomPoint && product[0].y > (bottomPoint - 5) && product[0].isAdequateProduct(this.fires[0].type)) {
+                if (product[0].y <= bottomPoint && product[0].y > (bottomPoint - 8) && product[0].isAdequateProduct(this.fires[0].type)) {
                     //defining the limits of the fire
-                    const leftLimit = this.fires[0].x;
-                    const rightLimit = this.fires[0].x + this.fires[0].widthOfSingleImage;
+                    const leftLimit = this.fires[0].x - 20;
+                    const rightLimit = this.fires[0].x + this.fires[0].widthOfSingleImage + 20;
                     if (product[0].x >= leftLimit && product[0].x <= rightLimit) {
                         this.impactUpdate();
                     };

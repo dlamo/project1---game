@@ -10,7 +10,7 @@ class Product {
     }
     draw() {
         //first update the position of the product shot then draw them in the canvas
-        this.y -= 5;
+        this.y -= 8;
         this.context.beginPath();
         this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         if (this.product === 'water') {

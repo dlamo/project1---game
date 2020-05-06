@@ -107,7 +107,6 @@ function updateGame() {
             localStorage.setItem('maxScoreName', player.innerText);
             restartButton.style.display = 'block';
             playSound('tada');
-            restartButton.addEventListener('click', () => location.reload());
         } else if (maxScore < parseInt(points.innerHTML)) {
             context.save();
             firefighter.drawWinner();
@@ -116,15 +115,14 @@ function updateGame() {
             localStorage.maxScoreName = player.innerText;
             restartButton.style.display = 'block';
             playSound('tada');
-            restartButton.addEventListener('click', () => location.reload());
         } else {
             context.save();
             firefighter.drawLoser();
             context.restore();
             restartButton.style.display = 'block';
             playSound('gameOver');
-            restartButton.addEventListener('click', () => location.reload());
         }
+        restartButton.addEventListener('click', () => location.reload());
     }
 }
 
@@ -151,10 +149,6 @@ function countTime() {
         time.innerHTML = seconds;
     }
     if (seconds % 20 == 0) {
-        gameSpeed *= 1.004;
+        gameSpeed *= 1.005;
     }
 }
-
-/*function restart() {
-    location.reload();
-}*/
