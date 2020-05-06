@@ -106,5 +106,28 @@ const firefighter = {
                 this.product = 'water'
             };
         };
+    },
+    drawWinner: function() {
+        const img = new Image();
+        img.src = 'images/trophy.png';
+        img.width = 496;
+        img.height = 604;
+        img.onload = function() {
+            context.drawImage(img, canvas.width/2 - img.width/2, canvas.height/2 - img.height/2, img.width, img.height);
+        }
+        context.fillStyle = 'red';
+        context.strokeStyle = 'yellow';
+        context.font = '900 56px Arial';
+        context.fillText('Yours is the maximum score!', 155, 200);
+        context.strokeText('Yours is the maximum score!', 155, 200);
+    },
+    drawLoser: function() {
+        context.fillStyle = 'red';
+        context.strokeStyle = 'yellow';
+        context.font = '900 104px Arial';
+        context.fillText('GAME', 430, 480);
+        context.strokeText('GAME', 430, 480);
+        context.fillText('OVER', 440, 730);
+        context.strokeText('OVER', 440, 730);
     }
 };

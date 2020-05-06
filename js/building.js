@@ -126,7 +126,7 @@ const building = {
     },
     //create and set the creation rate of bricks
     fallingBricks: function(speed) {
-        let speedValue = 0.99 / speed;
+        let speedValue = 0.98 / speed;
         if (Math.random() > speedValue) {
             const x = Math.floor(Math.random() * 900 + 150);
             this.bricks.push(new Brick(x));
@@ -143,11 +143,5 @@ const building = {
         if (this.bricks[0] && this.bricks[0].y > canvas.height) {
             this.bricks.shift();
         }
-    },
-    drawWinner: function() {
-
-    },
-    drawLoser: function() {
-
     }
 };

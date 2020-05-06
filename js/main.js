@@ -99,17 +99,19 @@ function updateGame() {
         fireSound.pause();
         //check the maxscore in the localStorage and return if the game score is higher
         if (!maxScore) {
-            building.drawWinner();
+            context.save();
+            firefighter.drawWinner();
+            context.restore();
             localStorage.setItem('maxScore', parseInt(points.innerHTML));
             localStorage.setItem('maxScoreName', player.innerText);
             playSound('tada');
         } else if (maxScore < parseInt(points.innerHTML)) {
-            building.drawWinner();
+            firefighter.drawWinner();
             localStorage.maxScore = parseInt(points.innerHTML);
             localStorage.maxScoreName = player.innerText;
             playSound('tada');
         } else {
-            building.drawLoser();
+            firefighter.drawLoser();
             playSound('gameOver');
         }
     }
