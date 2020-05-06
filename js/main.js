@@ -10,6 +10,7 @@ const music = document.getElementById('music');
 const introSound = document.querySelector('#start-screen audio');
 const gameSound = document.querySelector('#game-sound');
 const fireSound = document.querySelector('#fire-sound');
+const restartButton = document.querySelector('#main header button');
 
 //starting declarations
 const maxScore = localStorage.getItem('maxScore');
@@ -104,15 +105,25 @@ function updateGame() {
             context.restore();
             localStorage.setItem('maxScore', parseInt(points.innerHTML));
             localStorage.setItem('maxScoreName', player.innerText);
+            restartButton.style.display = 'block';
             playSound('tada');
+            restartButton.addEventListener('click', () => location.reload());
         } else if (maxScore < parseInt(points.innerHTML)) {
+            context.save();
             firefighter.drawWinner();
+            context.restore();
             localStorage.maxScore = parseInt(points.innerHTML);
             localStorage.maxScoreName = player.innerText;
+            restartButton.style.display = 'block';
             playSound('tada');
+            restartButton.addEventListener('click', () => location.reload());
         } else {
+            context.save();
             firefighter.drawLoser();
+            context.restore();
+            restartButton.style.display = 'block';
             playSound('gameOver');
+            restartButton.addEventListener('click', () => location.reload());
         }
     }
 }
@@ -143,3 +154,7 @@ function countTime() {
         gameSpeed *= 1.004;
     }
 }
+
+/*function restart() {
+    location.reload();
+}*/
