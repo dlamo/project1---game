@@ -89,11 +89,7 @@ const building = {
         };
         const randomPosition = Math.floor(Math.random() * positions.length);
         const randomFire = Math.random();
-        if (randomFire > 0.65) {
-            this.fires.push(new Fire(...positions[randomPosition],'blue'));
-        } else {
-            this.fires.push(new Fire(...positions[randomPosition],'red'));
-        };
+        this.fires.push(new Fire(...positions[randomPosition], randomFire > 0.65 ? 'blue' : 'red'));
     },
     //display the remaining time for the explosion to happen
     displayExplosion: function() {

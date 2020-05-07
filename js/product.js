@@ -33,8 +33,7 @@ class Product {
             return true;
         } else if (fireType === 'red' && this.product === 'water') {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 };

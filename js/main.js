@@ -65,7 +65,7 @@ function updateGame() {
 
     //in case the game is not over
     if (!building.gameEnd() && !building.fires[0].checkExplosion()) {
-        //lives, product and hydrant display
+        //lives, product, time for the explosion and hydrant display
         context.save(); 
         firefighter.drawLives();
         building.displayExplosion();
@@ -93,8 +93,6 @@ function updateGame() {
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
 
-        //console.log(!building.gameEnd() || !building.fires[0].checkExplosion())
-
         requestAnimationFrame(updateGame);
     } else {
         //stop the timer once the game is over
@@ -102,29 +100,23 @@ function updateGame() {
         gameSound.pause();
         fireSound.pause();
         //check the maxscore in the localStorage and return if the game score is higher
+        context.save();
         if (!maxScore) {
-            context.save();
             firefighter.drawWinner();
-            context.restore();
             localStorage.setItem('maxScore', parseInt(points.innerHTML));
             localStorage.setItem('maxScoreName', player.innerText);
-            restartButton.style.display = 'block';
             playSound('tada');
         } else if (maxScore < parseInt(points.innerHTML)) {
-            context.save();
             firefighter.drawWinner();
-            context.restore();
             localStorage.maxScore = parseInt(points.innerHTML);
             localStorage.maxScoreName = player.innerText;
-            restartButton.style.display = 'block';
             playSound('tada');
         } else {
-            context.save();
             firefighter.drawLoser();
-            context.restore();
-            restartButton.style.display = 'block';
             playSound('gameOver');
         }
+        context.restore();
+        restartButton.style.display = 'block';
         restartButton.addEventListener('click', () => location.reload());
     }
 }
@@ -136,23 +128,25 @@ function handleKeyEvent(e) {
     } else if (e.code === 'ArrowRight' && firefighter.x < 1090) {
         firefighter.move('right');
     } else if (e.code === 'Space') {
-        firefighter.productShot(); //firefighter.x
+        firefighter.productShot();
     } else if (e.code === 'KeyC') {
         firefighter.selectExtinguishingAgent();
     }
 }
 
-//function that controls the time passed and the increase of the game speed
+//function that controls the time passed, reduces the time to the explosion and the increase of the game speed
 function countTime() {
+    building.fires[0].time--;
     seconds++;
+    //display time as M:SS
     if (seconds > 59) {
         let secondNumber = seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60;
         time.innerHTML = `${Math.floor(seconds/60)}:${secondNumber}`;
     } else {
         time.innerHTML = seconds;
     }
+    //increase the game speed in intervals of 30 seconds
     if (seconds % 30 == 0) {
         gameSpeed *= 1.004;
     }
-    building.fires[0].time--;
 }

@@ -8,21 +8,16 @@ class Fire {
         this.height = 384;
         this.intensity = 5;
         this.type = type;
-        this.time = 10;
-        //variables needed for the animation
+        this.time = 25;
         this.img = new Image();
-        if (this.type == 'blue') {
-            this.img.src = 'images/fire2_64.png';
-        } else {
-            this.img.src = 'images/fire1_64.png';
-        }
-        this.totalNumberOfFrames = 10 // ten images in the image
+        this.img.src = this.type == 'blue' ? 'images/fire2_64.png' : 'images/fire1_64.png';
+        //variables needed for the animation
+        this.totalNumberOfFrames = 10 // ten images in the first image row
         this.imageFrameNumber = 0 // This is changed to make the sprite animate  
         this.widthOfImage = this.width; // find the width of the image
-        this.heightOfImage = this.height / 6; // find the height of the image (first we start with only the first row)
+        this.heightOfImage = this.height / 6; // find the height of the image
         this.widthOfSingleImage = this.widthOfImage / this.totalNumberOfFrames; // The width of each image in the spirite
         this.rowImage = 0;
-
     }
     animateFire() {
         const n = 3; //
@@ -43,7 +38,6 @@ class Fire {
     //check time explosion
     checkExplosion() {
         if (this.time == 0) {
-            firefighter.lives = 0;
             playSound('bomb');
             return true;
         }

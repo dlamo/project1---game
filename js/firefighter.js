@@ -43,10 +43,7 @@ const firefighter = {
     },
     //display the current product the player is shooting
     displayProduct: function() {
-        context.fillStyle = 'white';
-        context.font = '30px Arial';
         context.fillText('Product:', 1060, 150);
-        context.font = '28px Arial';
         context.fillText(this.product, 1060, 240);
         const legend = new Product(this.x, this.product, context);
         legend.drawActualProduct();
@@ -58,9 +55,7 @@ const firefighter = {
     },
     //call the method draw inside shot
     drawproductShots: function() {
-        this.productShots.forEach(shot => {
-            shot.draw();
-        })
+        this.productShots.forEach(shot => shot.draw());
     },
     //clear product bubble once are out of range of the fire
     clearProduct: function() {
@@ -71,11 +66,12 @@ const firefighter = {
     checkBrickHit: function(bricksArr) {
         if (bricksArr[0]){
             for (let i = 0; i < bricksArr.length; i++) {
+                const brick = bricksArr[i];
                 //check hit of the bricks with the firefighter
-                if (bricksArr[i].y >= (this.y - 0.6*this.width)) {
+                if (brick.y >= (this.y - 0.6*this.width)) {
                     const leftLimit = this.x;
                     const rightLimit = this.x + this.height;
-                    if (bricksArr[i].x + bricksArr[i].width >= leftLimit && bricksArr[i].x < rightLimit) {
+                    if (brick.x + brick.width >= leftLimit && brick.x < rightLimit) {
                         building.bricks.splice(i, 1);
                         playSound('blockHit');
                         playSound('maleGrunt');
@@ -85,8 +81,8 @@ const firefighter = {
                 };
                 //check hit of each of the bricks with the bubbles
                 this.productShots.forEach((shot, index) => {
-                    if (bricksArr[i].y + bricksArr[i].height >= shot.y - shot.radius && bricksArr[i].y + bricksArr[i].height > shot.y) {
-                        if (bricksArr[i].x + bricksArr[i].width >= shot.x - shot.radius && bricksArr[i].x < shot.x + shot.radius) {
+                    if (brick.y + brick.height >= shot.y - shot.radius && brick.y + brick.height > shot.y) {
+                        if (brick.x + brick.width >= shot.x - shot.radius && brick.x < shot.x + shot.radius) {
                             playSound('bubblePop');
                             this.productShots.splice(index, 1);
                         };
@@ -98,13 +94,8 @@ const firefighter = {
     //change the product when you are behind the hydrant
     selectExtinguishingAgent: function() {
         if (this.x >= 1010) {
-            if (this.product == 'water') {
-                playSound('changeProduct');
-                this.product = 'dry-chem'
-            } else if (this.product == 'dry-chem') {
-                playSound('changeProduct');
-                this.product = 'water'
-            };
+            this.product == 'water' ? this.product = 'dry-chem' : this.product = 'water';
+            playSound('changeProduct');
         };
     },
     drawWinner: function() {
