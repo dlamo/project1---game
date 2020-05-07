@@ -8,6 +8,7 @@ class Fire {
         this.height = 384;
         this.intensity = 5;
         this.type = type;
+        this.time = 10;
         //variables needed for the animation
         this.img = new Image();
         if (this.type == 'blue') {
@@ -38,5 +39,14 @@ class Fire {
             this.x - this.widthOfSingleImage, this.y - this.heightOfImage * n / 2 - 25, // x and y - where on the screen
             this.widthOfSingleImage * n, this.heightOfImage * n // width and height displayed
         );
+    }
+    //check time explosion
+    checkExplosion() {
+        if (this.time == 0) {
+            firefighter.lives = 0;
+            playSound('bomb');
+            return true;
+        }
+        return false;
     }
 };

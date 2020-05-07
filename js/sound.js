@@ -21,6 +21,9 @@ const sounds = {
     },
     'gameOver' : {
       url: 'sounds/game_over.mp3'
+    },
+    'bomb' : {
+      url: 'sounds/bomb.mp3'
     }
 };
 const soundContext = new AudioContext();

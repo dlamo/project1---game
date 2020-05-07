@@ -64,10 +64,11 @@ function updateGame() {
     context.restore();
 
     //in case the game is not over
-    if (!building.gameEnd()) {
+    if (!building.gameEnd() && !building.fires[0].checkExplosion()) {
         //lives, product and hydrant display
         context.save(); 
         firefighter.drawLives();
+        building.displayExplosion();
         firefighter.displayProduct();
         firefighter.drawHydrant();
         context.restore();
@@ -91,6 +92,8 @@ function updateGame() {
         firefighter.clearProduct();
         building.checkProductShots(firefighter.productShots);
         firefighter.checkBrickHit(building.bricks);
+
+        //console.log(!building.gameEnd() || !building.fires[0].checkExplosion())
 
         requestAnimationFrame(updateGame);
     } else {
@@ -148,7 +151,8 @@ function countTime() {
     } else {
         time.innerHTML = seconds;
     }
-    if (seconds % 20 == 0) {
-        gameSpeed *= 1.005;
+    if (seconds % 30 == 0) {
+        gameSpeed *= 1.004;
     }
+    building.fires[0].time--;
 }

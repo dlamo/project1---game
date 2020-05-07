@@ -95,6 +95,15 @@ const building = {
             this.fires.push(new Fire(...positions[randomPosition],'red'));
         };
     },
+    //display the remaining time for the explosion to happen
+    displayExplosion: function() {
+        context.fillText('Boom in:', 10, 360);
+        context.save();
+        context.fillStyle = 'red';
+        context.font = 'bold 42px Arial';
+        context.fillText(this.fires[0].time, 10, 410);
+        context.restore();
+    },
     //check if the fire if the fire is impacted by the product
     checkProductShots: function(product) { //give product array as argument
         if (product[0]) {

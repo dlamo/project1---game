@@ -20,7 +20,7 @@ const firefighter = {
     drawLives: function() {
         const live = new Image();
         context.fillStyle = 'white';
-        context.font = '36px Arial';
+        context.font = '32px Arial';
         context.fillText('Lives:', 10, 150);
         live.src = 'images/firefighter-left.webp';
         for (let i = 1; i <= this.lives; i++) {
@@ -44,9 +44,9 @@ const firefighter = {
     //display the current product the player is shooting
     displayProduct: function() {
         context.fillStyle = 'white';
-        context.font = '36px Arial';
-        context.fillText('Product:', 1060, 150);
         context.font = '30px Arial';
+        context.fillText('Product:', 1060, 150);
+        context.font = '28px Arial';
         context.fillText(this.product, 1060, 240);
         const legend = new Product(this.x, this.product, context);
         legend.drawActualProduct();

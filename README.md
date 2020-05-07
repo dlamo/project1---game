@@ -38,13 +38,12 @@ El juego se va a basar en el juego del protagonista de la película Rompe Ralph 
 
 ## Backlog
 * Yo como jugador quiero que aparezca fuego durante el juego 
-* Yo como jugador quiero que hayan varios niveles de dificultad
-* Yo como jugador quiero ganar puntos si acabo rápido el juego
-* Yo como jugador quiero que el fuego aumente o se expanda si no se apaga
-* Yo como jugador quiero que aparezcan proyectiles de los fuegos y resten vida al jugador
-* Yo como jugador quiero que mi personaje pueda recibir algún boost para aumentar la potencia
 * Yo como jugador quiero que haya diferentes tipos de fuego y de disparo
-* Yo como jugador quiero que haya una tabla de máximas puntuaciones
+* Yo como jugador quiero que haya diferentes tipos de fuego y de disparo
+* Yo como jugador quiero que haya una máxima puntuación
+* Yo como jugador quiero que aparezcan proyectiles del edificio y resten vida al jugador
+* Yo como jugador quiero que el fuego aumente o se expanda si no se apaga
+* Yo como jugador quiero que mi personaje pueda recibir algún boost para aumentar la potencia
 * Yo como jugador quiero que se haga una cuenta atrás antes de iniciar el juego
 
 ## Links
@@ -54,12 +53,14 @@ Repositorio:
 https://github.com/dlamo/project1-fire-killer
 [GitHub](http://github.com) 
 ​
-Deploy:
+### Deploy:
 https://dlamo.github.io/project1-fire-killer/
 [GitHub](http://github.com)
 ​
 ### Slides
-​
+​https://docs.google.com/presentation/d/16M3KTAYBzz4nY5tDxMzZo5Gj7pH3KH8dScobefvAkYs/edit?usp=sharing
+[GoogleSlides](https://docs.google.com/presentation/u/0/)
+
 ### Kanban
 https://trello.com/b/4DNsgafj/project-game
 [Trello](https://trello.com/)

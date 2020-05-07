@@ -24,7 +24,7 @@ class Product {
     //draw which one the player is currently using
     drawActualProduct() {
         this.x = 1080;
-        this.y = 190;
+        this.y = 195;
         this.draw();
     }
     //determine if the product is the correct when it hits the fire
